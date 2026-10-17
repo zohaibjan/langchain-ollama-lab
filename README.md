@@ -12,16 +12,26 @@ The default `1-start-here` branch contains a biography summarisation exercise: a
 
 ## Running the exercise
 
-1. Set up Python 3.11 and a compatible environment for the imports in `ice_breaker.py`.
-2. Install and run Ollama locally, and acquire the `mistral` model used by the script.
-3. Review the `information` string and model configuration.
-4. Run:
+Use Python 3.11+ and a fresh virtual environment:
 
 ```bash
+python -m venv .venv
+. .venv/bin/activate
+python -m pip install -r requirements.txt
+# Install/run Ollama separately, then pull the configured model:
+ollama pull mistral
 python ice_breaker.py
 ```
 
-The script imports `langchain_ollama` and `dotenv`, which are not explicitly listed in the current Pipfile. Resolve those dependencies before running. LangChain APIs have changed since this exercise was written, so environment compatibility needs checking.
+The direct dependencies above match the current `langchain_core` and `langchain_ollama` imports. `Pipfile` and `Pipfile.lock` remain historical coursework artifacts and do not define this refreshed environment. The bundled biography is historical sample text, not a current factual profile.
+
+Offline prompt/chain checks use a fake runnable and require no Ollama server:
+
+```bash
+python -m unittest discover -s tests -v
+```
+
+Those checks validate prompt substitution, missing-input handling and output parsing. A real Ollama generation was not exercised during this cleanup.
 
 ## Scope
 
